@@ -37,6 +37,9 @@
 - Pydantic
 - SQLAlchemy
 - Alembic
+- pytest
+- Ruff
+- Mypy / Pyright（项目选择并配置一种）
 
 ### 部署
 
@@ -51,16 +54,10 @@
 
 ## 7. Web 界面规范
 
-本项目界面规范位于 `docs/web-ui-standard.md`。
+本项目的组件库、图标体系、设计来源、目标视口、页面状态和项目差异只在 `docs/web-ui-standard.md` 中维护，本 README 不重复记录。没有 Web 界面时填写“不适用”。
 
-- 主要场景：公司内部和后台业务系统。
-- 主题令牌：`frontend/src/styles/seekway-theme.css`，并且只在全局样式入口导入一次。
-- 组件库：待填写；没有时填写“无”，不得由 Codex 自行引入。
-- 图标体系：待填写。
-- 主要支持视口：待填写。
-- 公司设计来源：[SEEKWAY Web UI Kit V1.2.0](https://www.figma.com/design/eed9GukOv7zM7n04Lu1xUl)。
-- 项目设计来源：待填写，例如项目 Figma、现有设计系统或相似页面。
-- 页面模板：仅作为参考起点，可按业务组合，不要求整页套用。
+- 项目运行时主题入口：`frontend/src/styles/seekway-theme.css` 或 `docs/web-ui-standard.md` 中声明的现有主题配置。
+- 公司设计参考：[SEEKWAY Web UI Kit V1.2.0](https://www.figma.com/design/eed9GukOv7zM7n04Lu1xUl)。
 
 ## 8. 项目结构
 
@@ -72,18 +69,18 @@
 
 ## 10. 测试与检查
 
-项目应保留 Windows 和 Linux / CI 两套检查入口，并保持检查内容一致。
+填写项目实际可执行的命令。Windows 和 Linux/CI 命令可以不同，但必须覆盖相同检查能力；不得保留无效占位后直接交付项目。
 
-Windows 统一检查入口：
+Windows：
 
 ```powershell
-.\scripts\check.ps1
+# 待填写，例如项目已有的格式、静态检查、测试和构建命令。
 ```
 
-Linux 或 CI 检查入口：
+Linux 或 CI：
 
 ```bash
-./scripts/check.sh
+# 待填写与 Windows 等价的项目命令。
 ```
 
 ## 11. 配置说明
