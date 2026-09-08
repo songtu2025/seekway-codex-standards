@@ -16,7 +16,7 @@
 
 ## 4. 规范基线
 
-- 公司规范版本：SEEKWAY Codex V1.6.0。
+- 公司规范版本：SEEKWAY Codex V1.7.0。
 - 接入日期：待填写。
 - 项目差异：待填写；没有差异时填写“无”。
 
@@ -64,9 +64,10 @@
 
 ## 8. Web 界面规范
 
-界面规则和项目差异统一维护在 `docs/web-ui-standard.md`；没有 Web 界面时填写“不适用”。
+界面核心规则和专项索引维护在 `docs/web-ui-standard.md`，布局、表单和数据规则按任务加载；没有 Web 界面时填写“不适用”。
 
 - 主题入口：`frontend/src/theme/seekway-antd-theme.ts` 和 `frontend/src/styles/seekway-theme.css`，或 `docs/web-ui-standard.md` 声明的现有配置。
+- 专项规范：`docs/web-ui-layout-standard.md`、`docs/web-ui-form-standard.md`、`docs/web-ui-data-standard.md`。
 - 公司设计参考：[SEEKWAY Web UI Kit V1.2.0](https://www.figma.com/design/eed9GukOv7zM7n04Lu1xUl)。
 
 ## 9. 项目结构

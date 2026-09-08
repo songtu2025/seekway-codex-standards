@@ -1,6 +1,6 @@
 # Codex React 与 TypeScript 工程规范
 
-涉及 React、TypeScript 或前端业务逻辑时，必须读取本文件。界面规则只在项目的 `docs/web-ui-standard.md` 中维护；文件不存在时读取模板并报告缺失。
+涉及 React、TypeScript 或前端业务逻辑时，必须读取本文件。界面规则由项目的 `docs/web-ui-standard.md` 索引；文件不存在时读取对应模板并报告缺失。
 
 ## 1. React 与 TypeScript
 
@@ -17,12 +17,25 @@
 
 1. 新 Web 项目默认使用 Ant Design 6 和 `@ant-design/icons` 6，React 版本不得低于 18。
 2. 现有项目保留已验证的组件库、图标和主题；没有成熟组件库时，改用公司基线前必须确认。
-3. 采用公司基线时，按钮、表单、表格、日期、选择、弹窗、抽屉、反馈、导航和分页优先使用 Ant Design，不重复实现基础组件。
-4. 多个页面重复出现且包含稳定业务规则的组合可以抽取为业务组件；不得为每个 Ant Design 组件创建无业务价值的转发封装。
-5. Ant Design 组件令牌由 `seekway-antd-theme.ts` 维护并通过根级 `ConfigProvider` 应用；布局扩展放在 `seekway-theme.css`，两处不得定义同一令牌。
-6. 全局反馈必须位于 Ant Design `App` 上下文，并通过 Hook 或上下文实例调用 message、notification 和 Modal，不得使用无法继承主题的静态调用。
-7. 使用 Ant Design 时，自定义样式优先使用 ThemeConfig、组件 Token、语义化 `classNames` 或 `styles` API，不得依赖其内部 DOM 层级、内部类名或高优先级全局覆盖。
-8. 采用公司基线时，`@ant-design/icons` 是唯一主要业务图标体系；图标按钮必须有可访问名称和提示。
+
+组件按以下顺序选择：
+
+```text
+Ant Design 能满足需求
+└── 直接使用 Ant Design 组件和 Token
+
+多个页面重复使用，并包含稳定业务规则
+└── 组合 Ant Design 组件形成业务组件
+
+Ant Design 无法满足必要的业务、交互或可访问性要求
+└── 说明缺口、复用范围和验证方式后，自定义基础组件
+```
+
+只改变名称、默认属性或样式时，不得创建转发组件；应使用业务代码、ThemeConfig、组件 Token、语义化 `classNames` 或 `styles`。自定义基础组件不得复制 Ant Design 已有能力，也不得通过依赖内部 DOM、内部类名或高优先级全局覆盖实现。
+
+Ant Design 组件令牌由 `seekway-antd-theme.ts` 维护并通过根级 `ConfigProvider` 应用；布局扩展放在 `seekway-theme.css`，两处不得定义同一令牌。全局反馈必须位于 Ant Design `App` 上下文，并通过 Hook 或上下文实例调用 message、notification 和 Modal，不得使用无法继承主题的静态调用。
+
+采用公司基线时，`@ant-design/icons` 是唯一主要业务图标体系；图标按钮必须有可访问名称和提示。
 
 使用项目已有包管理器从 npm Registry 安装基线依赖并提交锁文件，不得从非官方站点下载或用公共 CDN 引入生产代码。官方来源：[Ant Design React 文档](https://ant.design/docs/react/introduce/)、[`antd` npm 包](https://www.npmjs.com/package/antd)、[Ant Design 图标文档](https://ant.design/components/icon/)、[`@ant-design/icons` npm 包](https://www.npmjs.com/package/@ant-design/icons)。
 
