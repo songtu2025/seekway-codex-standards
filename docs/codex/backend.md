@@ -1,15 +1,15 @@
 # Codex Python、FastAPI 与数据库规范
 
-当任务涉及 Python、FastAPI、SQLAlchemy、Alembic、后端接口、数据库或迁移时，必须读取本文件。
+涉及 Python、FastAPI、SQLAlchemy、Alembic、后端接口、数据库或迁移时，必须读取本文件。
 
 ## 1. Python
 
 生成或修改的 Python 代码必须：
 
-1. 符合 PEP 8，使用 Ruff 进行格式和静态检查。
+1. 遵循 PEP 8，并使用 Ruff 格式化和检查。
 2. 使用清晰的英文变量名、函数名、类名和文件名，不得使用拼音或无意义缩写。
 3. 普通注释和 docstring 使用中文。
-4. 为公共函数和复杂业务逻辑提供类型注解。
+4. 公共函数和复杂业务逻辑必须有类型注解。
 5. 使用项目选定的 Mypy 或 Pyright 进行类型检查。
 6. 不得使用裸 `except`、吞掉异常或通过关闭 Ruff、类型检查规则掩盖问题。
 
@@ -30,7 +30,7 @@ API Router → Service → Repository → Database
 - `models`：定义数据库模型。
 - `core`：管理配置、日志、安全等公共能力。
 
-FastAPI 路由必须保持简洁，不得堆积复杂业务逻辑或直接编写大量数据库查询。Router、Service 和 Repository 之间不得反向依赖或跨层绕过业务规则。
+FastAPI 路由只处理接口职责，不得堆积业务逻辑或大量数据库查询。Router、Service 和 Repository 不得反向依赖或跨层绕过业务规则。
 
 ## 3. 数据库与迁移
 
@@ -40,7 +40,7 @@ FastAPI 路由必须保持简洁，不得堆积复杂业务逻辑或直接编写
 2. 同时提供升级和回滚方案。
 3. 明确说明受影响的表、字段、索引和数据。
 4. 保持模型、业务代码和迁移脚本一致。
-5. 对批量操作说明影响范围和回滚方式。
+5. 批量操作必须说明影响范围和回滚方式。
 
 不得：
 
