@@ -1,0 +1,43 @@
+{
+  "name": "seekway-login-template",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format:check": "prettier --check .",
+    "test": "playwright test",
+    "duplicates": "jscpd src --threshold 0 --reporters console",
+    "deadcode": "knip",
+    "cycles": "madge --circular --extensions ts,tsx --ts-config tsconfig.json src",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run test && npm run build && npm run duplicates && npm run deadcode && npm run cycles"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^6.3.4",
+    "antd": "^6.6.3",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@eslint/js": "^9.39.5",
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^22.20.1",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^5.2.0",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.12.0",
+    "jscpd": "^5.2.0",
+    "knip": "^6.35.0",
+    "madge": "^8.0.0",
+    "prettier": "^3.9.6",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.70.0",
+    "vite": "^7.3.6"
+  }
+}
