@@ -27,6 +27,22 @@ test("品牌文案包含完整两句及标点", async ({ page }) => {
   expect(fits).toBe(true);
 });
 
+test("Logo 下方展示品牌寓意", async ({ page }) => {
+  await page.goto("/");
+  const meaning = page.getByText("风起为帆，行而成路。", { exact: true });
+  await expect(meaning).toBeVisible();
+  const logo = page.getByRole("img", { name: "SEEKWAY", exact: true });
+  const [logoBox, meaningBox] = await Promise.all([
+    logo.boundingBox(),
+    meaning.boundingBox(),
+  ]);
+  expect(logoBox).not.toBeNull();
+  expect(meaningBox).not.toBeNull();
+  if (logoBox && meaningBox) {
+    expect(meaningBox.y).toBeGreaterThan(logoBox.y + logoBox.height);
+  }
+});
+
 test("可访问性与纯键盘登录路径", async ({ page }) => {
   await page.goto("/");
   await page.keyboard.press("Tab");

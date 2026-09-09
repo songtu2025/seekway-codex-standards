@@ -29,13 +29,14 @@
   );
 }
 
-.seekway-login__logo {
+.seekway-login__signature {
   position: absolute;
   z-index: 1;
   top: 3.2vh;
   left: 5.7%;
-  width: 36%;
-  height: auto;
+}
+
+.seekway-login__logo {
   display: flex;
   align-items: center;
   gap: clamp(14px, 1.18vw, 19px);
@@ -50,6 +51,14 @@
   width: clamp(48px, 4.04vw, 64px);
   height: clamp(48px, 4.04vw, 64px);
   flex: none;
+}
+
+.seekway-login__brand-meaning {
+  margin: clamp(10px, 1.1vh, 14px) 0 0;
+  color: rgb(255 255 255 / 72%);
+  font-size: clamp(13px, 0.95vw, 15px);
+  line-height: 1.5;
+  letter-spacing: 0.16em;
 }
 
 .seekway-login__art {
@@ -119,10 +128,16 @@
   .seekway-login__brand {
     padding: 24px;
   }
-  .seekway-login__logo {
+  .seekway-login__signature {
     position: static;
-    width: 193px;
-    height: 48px;
+  }
+  .seekway-login__logo {
+    width: fit-content;
+    height: auto;
+  }
+  .seekway-login__brand-meaning {
+    margin-top: 10px;
+    font-size: 13px;
   }
   .seekway-login__art {
     position: static;

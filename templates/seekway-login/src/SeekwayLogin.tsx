@@ -63,9 +63,16 @@ export function SeekwayLogin({
     >
       <main className="seekway-login" style={variables}>
         <section className="seekway-login__brand" aria-label="SEEKWAY 品牌">
-          <div className="seekway-login__logo" role="img" aria-label="SEEKWAY">
-            <img src={logo} alt="" width="48" height="48" />
-            <span>SEEKWAY</span>
+          <div className="seekway-login__signature">
+            <div
+              className="seekway-login__logo"
+              role="img"
+              aria-label="SEEKWAY"
+            >
+              <img src={logo} alt="" width="48" height="48" />
+              <span>SEEKWAY</span>
+            </div>
+            <p className="seekway-login__brand-meaning">风起为帆，行而成路。</p>
           </div>
           <div className="seekway-login__art">
             <BrandArtwork />
