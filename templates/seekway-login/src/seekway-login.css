@@ -70,14 +70,11 @@
   padding: 48px 32px;
 }
 
-.seekway-login__card {
+.seekway-login__form {
   box-sizing: border-box;
   width: 100%;
   max-width: 536px;
   padding: 68px 46px 48px;
-  border: 0;
-  border-radius: var(--login-radius);
-  background: transparent;
 }
 
 .seekway-login__heading {
@@ -111,7 +108,7 @@
   .seekway-login__entry {
     padding: 32px 24px;
   }
-  .seekway-login__card {
+  .seekway-login__form {
     padding: 40px 28px 32px;
   }
 }
@@ -135,7 +132,7 @@
   .seekway-login__entry {
     padding: 24px 16px;
   }
-  .seekway-login__card {
+  .seekway-login__form {
     padding: 36px 24px;
   }
 }

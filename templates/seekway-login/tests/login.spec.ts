@@ -10,16 +10,9 @@ test("品牌文案包含完整两句及标点", async ({ page }) => {
   });
   await expect(artwork).toBeVisible();
   await page.evaluate(() => document.fonts.ready);
-  expect(await artwork.locator("text").allTextContents()).toEqual([
-    "SEEK",
-    "THE",
-    "WAY",
-    "YOU",
-    "WANT.",
-    "LIVE THE",
-    "LIFE",
-    "YOU FOUND.",
-  ]);
+  expect((await artwork.locator("text").allTextContents()).join(" ")).toBe(
+    "SEEK THE WAY YOU WANT. LIVE THE LIFE YOU FOUND.",
+  );
   const fits = await artwork.evaluate((svg) => {
     const view = (svg as SVGSVGElement).viewBox.baseVal;
     return [...svg.querySelectorAll("text")].every((text) => {

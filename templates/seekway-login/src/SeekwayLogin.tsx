@@ -34,7 +34,6 @@ export function SeekwayLogin({
     "--login-page": token.colorBgLayout,
     "--login-text": token.colorText,
     "--login-muted": token.colorTextSecondary,
-    "--login-radius": `${token.borderRadiusLG}px`,
     "--login-font": token.fontFamily,
   } as CSSProperties;
 
@@ -73,7 +72,7 @@ export function SeekwayLogin({
           </div>
         </section>
         <section className="seekway-login__entry" aria-labelledby="login-title">
-          <div className="seekway-login__card">
+          <div className="seekway-login__form">
             <header className="seekway-login__heading">
               <h1 id="login-title">{systemName}</h1>
               <p>请输入账号和密码</p>

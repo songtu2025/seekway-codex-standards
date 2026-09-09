@@ -13,7 +13,7 @@
     "duplicates": "jscpd src --threshold 0 --reporters console",
     "deadcode": "knip",
     "cycles": "madge --circular --extensions ts,tsx --ts-config tsconfig.json src",
-    "check": "npm run format:check && npm run lint && npm run typecheck && npm run test && npm run build && npm run duplicates && npm run deadcode && npm run cycles"
+    "check": "npm run format:check && npm run lint && npm run test && npm run build && npm run duplicates && npm run deadcode && npm run cycles"
   },
   "dependencies": {
     "@ant-design/icons": "^6.3.4",

@@ -10,13 +10,11 @@
 
 ## 3. 明确不做
 
-- 待填写。
-- 待填写。
-- 待填写。
+- 待填写；没有时填写“无”。
 
 ## 4. 规范基线
 
-- 公司规范版本：SEEKWAY Codex V1.7.0。
+- 公司规范版本：SEEKWAY Codex V1.8.1。
 - 接入日期：待填写。
 - 项目差异：待填写；没有差异时填写“无”。
 
@@ -27,36 +25,10 @@
 以下业务规则不得被开发或重构破坏：
 
 1. 待填写。
-2. 待填写。
-3. 待填写。
 
 ## 6. 技术栈
 
-### 前端
-
-- React
-- TypeScript
-- Vite
-- Ant Design 6
-- `@ant-design/icons` 6
-
-### 后端
-
-- Python
-- FastAPI
-- Pydantic
-- SQLAlchemy
-- Alembic
-- pytest
-- Ruff
-- Mypy / Pyright（项目选择并配置一种）
-
-### 部署
-
-- Docker
-- Docker Compose
-- Nginx
-- 阿里云 ECS
+列出项目实际使用的前端、后端、数据和部署技术；不适用的类别不要保留。
 
 ## 7. 系统架构
 
@@ -82,17 +54,8 @@
 
 填写实际可执行的命令。Windows 和 Linux/CI 命令可以不同，但必须覆盖相同能力；交付前删除无效占位。
 
-Windows：
-
-```powershell
-# 待填写，例如项目已有的格式、静态检查、测试和构建命令。
-```
-
-Linux 或 CI：
-
-```bash
-# 待填写与 Windows 等价的项目命令。
-```
+- Windows：`待填写`
+- Linux 或 CI：`待填写`
 
 ## 12. 配置说明
 
@@ -102,6 +65,4 @@ Linux 或 CI：
 
 ## 13. 部署说明
 
-生产环境由部署负责人统一操作。
-
-部署步骤、数据库迁移和回滚方式记录在 `docs/deployment`。
+生产环境由部署负责人统一操作。部署步骤、数据库迁移和回滚方式记录在 `docs/deployment`；没有部署流程时填写“不适用”。
