@@ -1,13 +1,13 @@
 # SEEKWAY Web 界面开发标准
 
-- 规范版本：V1.4.0
+- 规范版本：V1.4.1
 - 适用范围：公司内部和后台业务系统
 - 视觉基线：SEEKWAY 退货语义分析智能体
 - 默认技术栈：React 18 及以上、TypeScript、Vite、Ant Design 6
 - 维护负责人：待填写
-- 最后更新：2026-09-08
+- 最后更新：2026-09-12
 
-本文件保存所有界面任务都要遵守的规则，并索引按任务加载的专项规范。现有项目保留已验证的设计系统，在“项目配置”中记录差异，不为套用默认值进行全量重构。
+本文件保存界面通用规则并索引专项规范。现有项目保留已验证的设计系统，在“项目配置”中记录差异，不为套用默认值重构。
 
 ## 1. 项目配置
 
@@ -58,9 +58,9 @@
 
 ## 5. 设计令牌
 
-采用公司基线时，只使用 Ant Design Token 和 SEEKWAY 扩展令牌，不得散落无语义的视觉数值或建立第二套主题。现有项目使用原主题系统中的等价令牌。
+采用公司基线时，只使用 Ant Design Token 和 SEEKWAY 扩展令牌，不得散落无语义视觉数值或建立第二套主题。现有项目使用原主题系统中的等价令牌。
 
-新项目复制 `templates/seekway-antd-theme.ts` 和 `templates/seekway-theme.css` 到对应的前端路径。前者是 Ant Design 组件令牌的唯一来源；后者只维护侧栏和页面布局等扩展，并在全局入口导入一次。两者不得定义同一令牌。现有项目继续使用原主题配置，只映射 SEEKWAY 语义。
+新项目复制 `templates/seekway-antd-theme.ts` 和 `templates/seekway-theme.css`。前者维护 Ant Design 组件令牌，后者维护布局扩展并在全局入口导入一次；两者不得定义同一令牌。现有项目继续使用原主题配置，只映射 SEEKWAY 语义。
 
 必须在应用根节点启用中文环境和 SEEKWAY 主题：
 
@@ -132,23 +132,18 @@ import "./styles/seekway-theme.css";
 
 ## 7. 工程边界
 
-React、TypeScript、组件决策和依赖约束见 `docs/codex/frontend.md` 与 `docs/codex/code-quality.md`；开发流程和验证要求见 `docs/codex/workflow.md` 与 `docs/codex/verification.md`。
-
-新项目基线只包含 Ant Design 6 和 `@ant-design/icons` 6，不含 `@ant-design/pro-components`、其他 UI 库、CSS 框架或可视化库。组件必须按 `docs/codex/frontend.md` 的决策树选择。
+React、TypeScript、组件和依赖约束见 `docs/codex/frontend.md` 与 `docs/codex/code-quality.md`；流程和验证见 `docs/codex/workflow.md` 与 `docs/codex/verification.md`。新项目基线只包含 Ant Design 6 和 `@ant-design/icons` 6；`@ant-design/pro-components`、其他 UI 库、CSS 框架或可视化库须单独批准。
 
 ## 8. 界面验收清单
 
-- [ ] 已读取本文件和任务命中的专项规范，未加载无关专项文件。
-- [ ] 已逐项验证任务命中的专项规则。
-- [ ] 页面目标、信息层级和主操作明确。
-- [ ] 复用了项目令牌、组件、图标和相似页面模式。
+- [ ] 已读取并验证本文件及任务命中的专项规范，未加载无关专项文件。
+- [ ] 页面目标、信息层级和主操作明确，并复用项目令牌、组件、图标和相似页面模式。
 - [ ] 采用公司基线时，根级 `ConfigProvider`、Ant Design `App`、中文环境和 SEEKWAY 主题已经生效。
 - [ ] 任务涉及的加载、空数据、失败、无权限、提交和反馈状态完整。
 - [ ] 目标视口下没有意外横向滚动、遮挡和不可操作区域。
-- [ ] 关键路径可仅使用键盘完成，焦点清晰且不被遮挡。
-- [ ] 对比度、目标尺寸和语义结构达到 WCAG 2.2 AA。
+- [ ] 关键路径可用键盘完成，焦点、对比度、目标尺寸和语义结构达到 WCAG 2.2 AA。
 - [ ] 未混入第二套 UI 或图标体系，也未依赖 Ant Design 内部 DOM、内部类名或高优先级全局覆盖。
-- [ ] 未擅自改变业务、权限、接口和数据结构，或引入基线之外的依赖。
+- [ ] 未擅自改变业务、权限、接口和数据结构，也未引入未经批准的依赖。
 
 未实际完成的视觉、交互或可访问性检查必须报告为未验证。
 
