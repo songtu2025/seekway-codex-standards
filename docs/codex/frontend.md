@@ -18,6 +18,8 @@
 1. 新 Web 项目默认使用 Ant Design 6 和 `@ant-design/icons` 6，React 版本不得低于 18。
 2. 现有项目保留已验证的组件库、图标和主题；改用公司基线前必须确认。
 
+新建或明显重塑界面时，可选使用 [Frontend Design Skill](https://github.com/anthropics/skills/tree/main/skills/frontend-design) 先形成与业务、受众和页面目标相关的配色、字体、布局、动效和文案方案，再实现代码。用户明确要求、项目现有设计系统和 Web UI 规范始终优先；不得因使用该 Skill 擅自增加字体、组件库或其他生产依赖。
+
 组件按以下顺序选择：
 
 ```text
@@ -37,7 +39,15 @@ Ant Design 组件令牌由 `seekway-antd-theme.ts` 维护并通过根级 `Config
 
 采用公司基线时，`@ant-design/icons` 是唯一主要业务图标体系，图标按钮须有可访问名称和提示。使用项目现有包管理器从 npm Registry 安装依赖并提交锁文件，不得从非官方站点或公共 CDN 引入生产代码。官方来源：[Ant Design React 文档](https://ant.design/docs/react/introduce/)、[`antd` npm 包](https://www.npmjs.com/package/antd)、[Ant Design 图标文档](https://ant.design/components/icon/)、[`@ant-design/icons` npm 包](https://www.npmjs.com/package/@ant-design/icons)。
 
-## 3. 禁止事项
+## 3. 前端 Demo 与合成数据
+
+1. 新系统、新操作流程、多角色交互或界面方案不明确时，可先用前端 Demo 验证页面关系、操作路径和信息层级。页面已有成熟模式或主要风险在后端、集成、数据或性能时，不得为了展示而先做完整 Demo。
+2. Demo 使用的合成数据不得来自真实用户或生产环境，必须明确标记为演示数据，并尽量与预期数据契约一致。
+3. 合成数据至少覆盖任务需要的正常、加载、空数据、失败、无权限、长文本和极值状态；不需要的状态不得为了凑清单而强行增加。
+4. 合成数据放在集中的 fixture、mock Service 或适配层，不得散落在页面组件内；不得为 Demo 擅自新增生产依赖。
+5. Demo 经用户确认后，先定义接口和数据契约，再打通一个真实页面、接口、业务逻辑和数据读写的最小端到端流程。Demo 代码只有通过生产代码要求后才可继续使用，否则应删除或重写。
+
+## 4. 禁止事项
 
 1. 不得滥用 `any`、使用 `@ts-ignore` 掩盖错误或无理由使用非空断言。
 2. 不得将大量请求、状态和业务逻辑堆积在单个组件中。

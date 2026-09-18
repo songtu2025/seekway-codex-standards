@@ -2,6 +2,81 @@
 
 本仓库保存 SEEKWAY Codex 开发规范，约束需求分析、代码修改、验证和结果汇报。
 
+## 不会开发也能使用
+
+这是规则源仓库，不是需要直接运行的业务系统。普通使用者不需要先学习 Git、命令行或编程。
+
+### 第一次使用
+
+1. 新项目先创建一个空文件夹；现有项目打开原项目根目录。不要打开规范 ZIP 的解压目录。
+2. 在该目录中新建 Codex 任务，复制下面对应的提示词。
+3. 回答业务问题，阅读 Codex 用通俗语言给出的修改、风险和恢复方式。
+4. 确认需求、方案或 Demo 后再允许修改。
+5. 根据验证结果决定发布、继续修改或停止。
+
+### 新项目
+
+```text
+我没有开发经验，当前目录是准备创建的业务项目。
+
+请从 https://github.com/songtu2025/seekway-codex-standards 获取规范，优先使用 README 当前版本对应的标签 ZIP；标签不存在时再使用 main.zip。将 ZIP 下载并解压到当前项目之外的临时目录，不要使用 git clone，也不要把整个规范仓库放入当前项目。
+
+先检查当前目录、规范来源、Git 状态和回退条件，再用通俗语言说明需要接入的文件、需要我补充的信息、风险和验证方式，等我确认后再执行。完成后记录接入来源、规范版本、日期和版本控制状态，并提醒我新建 Codex 任务验证规则加载。先不要开发业务功能。
+```
+
+### 现有项目
+
+```text
+我没有开发经验，当前目录是已有的业务项目。
+
+请从 https://github.com/songtu2025/seekway-codex-standards 获取规范，优先使用 README 当前版本对应的标签 ZIP；标签不存在时再使用 main.zip。将 ZIP 下载并解压到当前项目之外的临时目录，不要使用 git clone，也不要把整个规范仓库放入当前项目。
+
+先检查当前目录、规范来源、Git 状态和回退条件，再只读审计现有规则、技术栈和检查命令。保留有效规则，用通俗语言说明差异、风险和恢复方式，等我确认后再备份需要修改的规则文件并合并。完成后记录接入来源、规范版本、日期和版本控制状态，并提醒我新建 Codex 任务验证规则加载。
+```
+
+### 无 Git 接入说明
+
+- 接入规范不需要 Git；正式开发仍应使用 Git 或其他受控版本管理。没有 Git 时，Codex 不能声称已经提交、推送或具备可靠回滚能力。
+- 已发布版本使用标签 ZIP。只有试用主分支最新内容时才使用 [main.zip](https://github.com/songtu2025/seekway-codex-standards/archive/refs/heads/main.zip)；无法访问 GitHub 时，使用公司受控共享位置提供的同版本 ZIP。
+- ZIP 只在项目外的临时目录中审计。接入前必须确认来源和版本，接入后不得把完整规范仓库留在业务项目中。
+- 没有 Git 的现有项目在修改前须将目标规则文件备份到项目外。该备份只用于本次恢复，不能代替版本管理。
+- 接入后新建 Codex 任务并发送：`请列出本任务实际加载的 AGENTS.md 路径，并概括关键规则，不要修改文件。`
+
+### 日常提需求
+
+```text
+我没有开发经验。请先不要写代码，先通过提问帮我区分真实业务目标、必须保留的规则、现有工具的限制和操作习惯，再整理适合 Web 系统的流程、验收标准和方案，等我确认后再开发。
+
+我的想法是：在这里描述想解决的问题。
+```
+
+## AI 协作开发流程
+
+```mermaid
+flowchart LR
+    A[发现问题] --> B[定义目标]
+    B --> C[业务、用户、数据和页面设计]
+    C --> D{最大不确定性}
+    D -->|界面| E[前端 Demo]
+    D -->|技术| F[技术验证]
+    D -->|较低| G[直接实现]
+    E --> H[最小真实闭环]
+    F --> H
+    G --> H
+    H --> I[增量开发与验证]
+    I --> J[发布与运营]
+    J --> K[效果检查]
+    K -->|改进| A
+```
+
+`Plan` 对应问题、目标和设计，`Do` 对应验证、开发和发布，`Check` 对应技术检查、用户验收和业务指标，`Act` 对应优化、回滚、暂停或下线。详细阶段、任务分级和确认门见 [开发流程与项目边界](docs/codex/workflow.md)。
+
+| 任务级别 | 适用情况 | 执行深度 |
+| --- | --- | --- |
+| 简单 | 现有模式内的小改动 | 目标、验收、影响、修改和检查 |
+| 标准 | 新页面、接口、数据或业务操作 | 完整设计、原型决策、真实闭环和验收 |
+| 高风险 | 新系统、敏感数据、复杂权限、迁移或外部集成 | 额外完成安全、容量、发布、监控和回滚设计 |
+
 ## 项目架构
 
 ![SEEKWAY Codex 开发规范架构](docs/images/seekway-codex-standards-architecture.png)
@@ -41,13 +116,7 @@
 - [templates](templates)：项目文档、主题、界面规范和登录页模板。
 - [CHANGELOG.md](CHANGELOG.md)：版本变更记录。
 
-首次使用：
-
-```text
-请读取当前项目的 AGENTS.md 和 README，只概括项目规则，不要修改文件。
-```
-
-## 项目负责人配置
+## 维护者接入说明（普通使用者可跳过）
 
 ### 新项目
 
@@ -61,7 +130,7 @@
 
 ### 现有项目
 
-先审计现有规则和配置，再按 `docs/codex/workflow.md` 差异合并。不得用公司模板覆盖已有规则或为符合默认技术栈进行全量迁移。项目 README 须记录规范基线版本、接入日期、项目差异和真实检查命令。
+先审计现有规则和配置，再按 `docs/codex/workflow.md` 差异合并。不得用公司模板覆盖已有规则或为符合默认技术栈进行全量迁移。项目 README 须记录规范基线版本、接入来源、接入日期、版本控制状态、加载验证、项目差异和真实检查命令。
 
 ## Web 界面规范
 
@@ -135,13 +204,21 @@ npm ls antd @ant-design/icons react react-dom
 | 不理解需求讨论中的产品概念 | [VibeHub 产品术语](https://vibe-hub.org/topics/product) | 查阅用户故事、用户流程、PRD、MVP 等概念；直接访问，无需安装 |
 | 架构或流程复杂，文字难以说明 | [Archify](https://github.com/tt-a1i/archify) | 用交互图示说明关键关系，辅助方案讨论和项目交接 |
 | 不知道已有实现在哪里、修改会影响什么 | [CodeGraph](https://github.com/colbymchenry/codegraph) | 通过代码索引查找符号、调用链和依赖，定位可复用实现 |
+| 新建或重塑 Web 界面，需要明确视觉方向 | [Frontend Design Skill](https://github.com/anthropics/skills/tree/main/skills/frontend-design) | 基于业务语境规划配色、字体、布局、动效和界面文案，减少模板化设计 |
 
-- 资源推荐不代表安装授权，不得自动修改个人配置或加入业务生产依赖；CodeGraph 索引由项目负责人决定。
-- 术语、图示和索引须与项目事实核对，不能替代需求确认、测试和代码质量检查。工具不可用时继续按现有方式开发，权限和敏感信息边界见 [开发流程与项目边界](docs/codex/workflow.md)。
+资源配置和权限边界见 [开发流程与项目边界](docs/codex/workflow.md)。用户拒绝配置后继续按现有方式开发；术语、图示和索引仍须与项目事实核对，不能替代需求确认、测试和代码质量检查。
+
+经用户确认后，可选安装 Frontend Design Skill：
+
+```sh
+npx skills add https://github.com/anthropics/skills --skill frontend-design
+```
+
+该 Skill 来自 Anthropic 的 Claude Skills 示例仓库，并非 Codex 官方资源；安装前应审查当前版本和 Apache-2.0 许可证。
 
 ## 规则加载方式
 
-规则优先级、目录作用域和 `AGENTS.override.md` 处理方式见 [开发流程与项目边界](docs/codex/workflow.md)；加载机制以 [Codex 官方说明](https://learn.chatgpt.com/docs/agent-configuration/agents-md) 为准。
+规则优先级、目录作用域和 `AGENTS.override.md` 处理方式见 [开发流程与项目边界](docs/codex/workflow.md)；加载机制以 [Codex 官方说明](https://developers.openai.com/zh-Hans/docs/agent-configuration/agents-md) 为准。
 
 ## 仓库检查
 
@@ -161,13 +238,11 @@ git diff --check
 - **MINOR**：新增规则、模板、检查能力或向后兼容的默认能力。
 - **MAJOR**：删除或反转现有规则、改变默认技术栈，或要求现有项目迁移。
 
-版本发布后不得修改同一版本的内容。后续变化必须增加版本号，并在 CHANGELOG 中记录新增、变更和删除的规则。
-
-规范维护和发布检查见 [验证与完成报告规范](docs/codex/verification.md)。
+版本发布后不得修改同一版本的内容。后续变化必须增加版本号，并在 CHANGELOG 中记录新增、变更和删除的规则。发布、标签和归档要求见 [开发流程与项目边界](docs/codex/workflow.md)，检查项见 [验证与完成报告规范](docs/codex/verification.md)。
 
 ## 当前版本
 
-- 版本：V1.9.0
-- 发布日期：2026-09-14
+- 版本：V1.10.0
+- 发布日期：2026-09-18
 - 仓库定位：规范源仓库，接入日期和项目差异不适用。
 - 变更记录：[CHANGELOG.md](CHANGELOG.md)
