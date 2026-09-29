@@ -1,11 +1,10 @@
 # SEEKWAY Web 界面开发标准
 
-- 规范版本：V1.4.1
+- 规范版本：V2.0.0
 - 适用范围：公司内部和后台业务系统
 - 视觉基线：SEEKWAY 退货语义分析智能体
-- 默认技术栈：React 18 及以上、TypeScript、Vite、Ant Design 6
 - 维护负责人：待填写
-- 最后更新：2026-09-12
+- 最后更新：2026-09-29
 
 本文件保存界面通用规则并索引专项规范。现有项目保留已验证的设计系统，在“项目配置”中记录差异，不为套用默认值重构。
 
@@ -17,6 +16,7 @@
 - 品牌主色：默认 `#12765B`。
 - UI 组件库：新项目默认 Ant Design 6；现有项目填写已验证的组件库，不得自动迁移。
 - 图标体系：新项目默认 `@ant-design/icons` 6；同一项目只能使用一个主要业务图标体系。
+- 图表库：新项目需要图表时默认 Apache ECharts；无图表需求时不安装，现有项目填写已验证的选型。
 - 默认语言：简体中文。
 - 默认时区：待填写。
 - 主要设计视口：默认 `1440 × 900`。
@@ -132,22 +132,9 @@ import "./styles/seekway-theme.css";
 
 ## 7. 工程边界
 
-React、TypeScript、组件和依赖约束见 `docs/codex/frontend.md` 与 `docs/codex/code-quality.md`；流程和验证见 `docs/codex/workflow.md` 与 `docs/codex/verification.md`。新项目基线只包含 Ant Design 6 和 `@ant-design/icons` 6；`@ant-design/pro-components`、其他 UI 库、CSS 框架或可视化库须单独批准。
+React、TypeScript、组件和依赖约束见 `docs/codex/frontend.md` 与 `docs/codex/code-quality.md`；界面验收和结果状态见 `docs/codex/verification.md`。本文件只规定界面通用规则。
 
-## 8. 界面验收清单
-
-- [ ] 已读取并验证本文件及任务命中的专项规范，未加载无关专项文件。
-- [ ] 页面目标、信息层级和主操作明确，并复用项目令牌、组件、图标和相似页面模式。
-- [ ] 采用公司基线时，根级 `ConfigProvider`、Ant Design `App`、中文环境和 SEEKWAY 主题已经生效。
-- [ ] 任务涉及的加载、空数据、失败、无权限、提交和反馈状态完整。
-- [ ] 目标视口下没有意外横向滚动、遮挡和不可操作区域。
-- [ ] 关键路径可用键盘完成，焦点、对比度、目标尺寸和语义结构达到 WCAG 2.2 AA。
-- [ ] 未混入第二套 UI 或图标体系，也未依赖 Ant Design 内部 DOM、内部类名或高优先级全局覆盖。
-- [ ] 未擅自改变业务、权限、接口和数据结构，也未引入未经批准的依赖。
-
-未实际完成的视觉、交互或可访问性检查必须报告为未验证。
-
-## 9. 参考标准
+## 8. 参考标准
 
 - [SEEKWAY Web UI Kit V1.2.0](https://www.figma.com/design/eed9GukOv7zM7n04Lu1xUl)
 - [Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/WCAG22/)

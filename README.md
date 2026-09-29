@@ -19,7 +19,7 @@
 ```text
 我没有开发经验，当前目录是准备创建的业务项目。
 
-请从 https://github.com/songtu2025/seekway-codex-standards 获取规范，优先使用 README 当前版本对应的标签 ZIP；标签不存在时再使用 main.zip。将 ZIP 下载并解压到当前项目之外的临时目录，不要使用 git clone，也不要把整个规范仓库放入当前项目。
+请从 https://github.com/songtu2025/seekway-codex-standards 获取规范，使用 README 标注的当前已发布版本对应的标签 ZIP。若无法取得该版本，先说明原因并询问我是否使用同版本的受控离线 ZIP；只有我明确要求试用主分支时才使用 main.zip。将 ZIP 下载并解压到当前项目之外的临时目录，不要使用 git clone，也不要把整个规范仓库放入当前项目。
 
 先检查当前目录、规范来源、Git 状态和回退条件，再用通俗语言说明需要接入的文件、需要我补充的信息、风险和验证方式，等我确认后再执行。完成后记录接入来源、规范版本、日期和版本控制状态，并提醒我新建 Codex 任务验证规则加载。先不要开发业务功能。
 ```
@@ -29,7 +29,7 @@
 ```text
 我没有开发经验，当前目录是已有的业务项目。
 
-请从 https://github.com/songtu2025/seekway-codex-standards 获取规范，优先使用 README 当前版本对应的标签 ZIP；标签不存在时再使用 main.zip。将 ZIP 下载并解压到当前项目之外的临时目录，不要使用 git clone，也不要把整个规范仓库放入当前项目。
+请从 https://github.com/songtu2025/seekway-codex-standards 获取规范，使用 README 标注的当前已发布版本对应的标签 ZIP。若无法取得该版本，先说明原因并询问我是否使用同版本的受控离线 ZIP；只有我明确要求试用主分支时才使用 main.zip。将 ZIP 下载并解压到当前项目之外的临时目录，不要使用 git clone，也不要把整个规范仓库放入当前项目。
 
 先检查当前目录、规范来源、Git 状态和回退条件，再只读审计现有规则、技术栈和检查命令。保留有效规则，用通俗语言说明差异、风险和恢复方式，等我确认后再备份需要修改的规则文件并合并。完成后记录接入来源、规范版本、日期和版本控制状态，并提醒我新建 Codex 任务验证规则加载。
 ```
@@ -69,13 +69,7 @@ flowchart LR
     K -->|改进| A
 ```
 
-`Plan` 对应问题、目标和设计，`Do` 对应验证、开发和发布，`Check` 对应技术检查、用户验收和业务指标，`Act` 对应优化、回滚、暂停或下线。详细阶段、任务分级和确认门见 [开发流程与项目边界](docs/codex/workflow.md)。
-
-| 任务级别 | 适用情况 | 执行深度 |
-| --- | --- | --- |
-| 简单 | 现有模式内的小改动 | 目标、验收、影响、修改和检查 |
-| 标准 | 新页面、接口、数据或业务操作 | 完整设计、原型决策、真实闭环和验收 |
-| 高风险 | 新系统、敏感数据、复杂权限、迁移或外部集成 | 额外完成安全、容量、发布、监控和回滚设计 |
+任务分级、各阶段的确认条件和效果复查要求见 [开发流程与项目边界](docs/codex/workflow.md)。
 
 ## 项目架构
 
@@ -83,31 +77,7 @@ flowchart LR
 
 `AGENTS.md` 是规则入口，Codex 按任务加载 `docs/codex` 专项规范，并使用模板、质量门禁和完成报告约束交付。
 
-### 二级架构：规则执行链
-
-![SEEKWAY Codex 二级架构](docs/images/seekway-codex-standards-level2-architecture.png)
-
-二级架构说明通用规范、技术专项规范和验证规范如何共同约束任务。
-
-### 三级架构：开发任务控制点
-
-![SEEKWAY Codex 三级架构](docs/images/seekway-codex-standards-level3-architecture.png)
-
-三级架构列出规则加载、开发前确认、分层实施、质量清理、验证状态和完成报告，并标出高风险影响与失败修正闭环。
-
-## 项目价值
-
-### 对公司
-
-- 统一规则、技术基线和交付标准，减少团队理解偏差。
-- 复用项目、任务和界面模板，减少重复建设和人员切换成本。
-- 通过验证门禁和固定完成报告控制变更风险并保留交付证据。
-
-### 对个人
-
-- 明确需求调研、方案确认、实现和验证的工作路径，减少遗漏与返工。
-- 提供修改边界和风险检查项，便于判断复杂任务的影响。
-- 通过模板复用、质量检查和固定报告减少重复劳动，使产出更容易评审和复用。
+按需查看[规则执行链](docs/images/seekway-codex-standards-level2-architecture.png)和[单次开发任务的控制点](docs/images/seekway-codex-standards-level3-architecture.png)。
 
 ## 仓库内容
 
@@ -124,7 +94,7 @@ flowchart LR
 2. 将 `docs/codex` 复制到项目的 `docs/codex`，保留 `AGENTS.md` 中的专项规范索引。
 3. 使用 `templates/project-README-template.md` 建立 README，并填写业务边界、实际检查命令和项目差异。
 4. 将 `templates/gitignore-template` 复制为根目录 `.gitignore`，再补充项目产物。
-5. 新 Web 项目按 `docs/codex/frontend.md` 安装 Ant Design 6 和 `@ant-design/icons` 6，并复制两个 SEEKWAY 主题模板。
+5. 新 Web 项目按 `docs/codex/frontend.md` 安装 Ant Design 6 和 `@ant-design/icons` 6；有图表需求时安装 `echarts`，并复制两个 SEEKWAY 主题模板。
 6. 将四份 `web-ui-*-template.md` 分别复制为 `docs/web-ui-standard.md`、`docs/web-ui-layout-standard.md`、`docs/web-ui-form-standard.md` 和 `docs/web-ui-data-standard.md`，填写设计来源和项目差异。
 7. 使用 `templates/task-template.md` 编写任务；仅在子目录确有独立规则时创建嵌套 `AGENTS.md`。
 
@@ -134,7 +104,7 @@ flowchart LR
 
 ## Web 界面规范
 
-新 Web 项目默认使用 Ant Design 6、`@ant-design/icons` 6 和 SEEKWAY 主题。工程约束见 `docs/codex/frontend.md`，界面规则见 `docs/web-ui-standard.md`。设计参考：[SEEKWAY Web UI Kit V1.2.0](https://www.figma.com/design/eed9GukOv7zM7n04Lu1xUl)。
+新 Web 项目默认使用 Ant Design 6、`@ant-design/icons` 6 和 SEEKWAY 主题；需要图表时默认使用 Apache ECharts。工程约束见 `docs/codex/frontend.md`，界面规则见 `docs/web-ui-standard.md`。设计参考：[SEEKWAY Web UI Kit V1.2.0](https://www.figma.com/design/eed9GukOv7zM7n04Lu1xUl)。
 
 现有项目无需自动拆分界面规范；迁移时保留原规则并更新专项索引。
 
@@ -240,9 +210,7 @@ git diff --check
 
 版本发布后不得修改同一版本的内容。后续变化必须增加版本号，并在 CHANGELOG 中记录新增、变更和删除的规则。发布、标签和归档要求见 [开发流程与项目边界](docs/codex/workflow.md)，检查项见 [验证与完成报告规范](docs/codex/verification.md)。
 
-## 当前版本
+## 版本状态
 
-- 版本：V1.10.0
-- 发布日期：2026-09-18
-- 仓库定位：规范源仓库，接入日期和项目差异不适用。
-- 变更记录：[CHANGELOG.md](CHANGELOG.md)
+- 当前已发布版本：V1.10.0（2026-09-18）。
+- 当前工作版本：V2.0.0（待发布），变更见 [CHANGELOG.md](CHANGELOG.md)；尚未完成版本发布和标签 ZIP 验证。

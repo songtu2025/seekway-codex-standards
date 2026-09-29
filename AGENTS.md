@@ -1,8 +1,8 @@
 # Codex 项目开发规范
 
 - 规范来源：SEEKWAY Codex 开发规范
-- 规范版本：V1.10.0
-- 最后更新：2026-09-18
+- 规范版本：V2.0.0（待发布）
+- 最后更新：2026-09-29
 
 本文件只保留始终生效的规则和专项规范索引；“必须”“不得”和“禁止”均为强制要求。
 
@@ -18,7 +18,7 @@
 | 了解业务边界、架构、启动或部署方式 | `README.md` 及其明确引用的文档 |
 | 梳理非简单需求、设计方案、实施代码或调整结构、配置、依赖、部署、项目文档 | `docs/codex/workflow.md` |
 | 新增、修改、重构或评审任何代码 | `docs/codex/code-quality.md` |
-| 修改 Python、FastAPI、数据库或迁移 | `docs/codex/backend.md` |
+| 修改 Python、FastAPI、数据库、迁移或前后端 API 契约 | `docs/codex/backend.md` |
 | 修改 React 或 TypeScript | `docs/codex/frontend.md` |
 | 修改 Web 界面 | `docs/codex/frontend.md` 和 `docs/web-ui-standard.md`；按后者索引加载任务专项规范；文件缺失时读取对应模板并报告缺失 |
 | 制定验证方案、执行检查或输出完成报告 | `docs/codex/verification.md` |

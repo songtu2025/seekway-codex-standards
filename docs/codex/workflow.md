@@ -9,51 +9,67 @@
 - 开发环境：Windows
 - 代码托管：GitHub
 - 生产环境：阿里云 ECS
-- 前端：React 18 及以上、TypeScript、Vite；新 Web 项目默认使用 Ant Design 6 和 `@ant-design/icons` 6
+- 前端：React 18 及以上、TypeScript、Vite；新 Web 项目默认使用 Ant Design 6 和 `@ant-design/icons` 6，有图表需求时默认使用 Apache ECharts
 - 后端：Python、FastAPI、Pydantic、SQLAlchemy、Alembic、pytest、Ruff，以及项目选择的 Mypy 或 Pyright
 - 部署：Docker、Docker Compose、Nginx
 
-Ant Design 6 和 `@ant-design/icons` 6 是新 Web 项目的基线依赖。未经批准，不得更换现有框架、组件库、数据库或部署方案，也不得增加其他生产依赖和基础设施。现有项目保留原选型。
+Ant Design 6 和 `@ant-design/icons` 6 是新 Web 项目的基线依赖；图表库的按需基线见 `docs/codex/frontend.md`。未经批准，不得更换现有框架、组件库、数据库或部署方案，也不得增加基线以外的生产依赖和基础设施。现有项目保留原选型。
 
 ## 2. 标准项目结构
 
 新项目默认采用前后端分离、同一仓库管理的结构：
 
 ```text
-project-name/
-├── AGENTS.md
-├── README.md
-├── .env.example
-├── .gitignore
-├── compose.yaml
-├── docs/
-│   └── codex/
-├── frontend/
-│   ├── package.json
-│   ├── src/
-│   └── tests/
-├── backend/
-│   ├── pyproject.toml
-│   ├── alembic.ini
-│   ├── app/
-│   ├── migrations/
-│   └── tests/
-├── deploy/
-└── .github/
-    ├── workflows/
-    ├── ISSUE_TEMPLATE/
-    ├── pull_request_template.md
-    └── CODEOWNERS
+project-name/                          // 独立业务项目根目录
+├── AGENTS.md                          // 项目开发规则入口
+├── README.md                          // 项目说明与实际检查命令
+├── .env.example                       // 环境变量示例，不含真实密钥
+├── .gitignore                         // Git 忽略规则
+├── compose.yaml                       // 容器编排配置
+├── docs/                              // 项目文档
+│   └── codex/                         // 按任务加载的开发专项规范
+├── frontend/                          // React 前端
+│   ├── package.json                   // 前端依赖与脚本
+│   ├── src/                           // 前端源码
+│   │   ├── main.tsx                   // 前端启动入口
+│   │   ├── app/                       // 路由、布局和全局 Provider
+│   │   ├── features/                  // 按业务域组织页面和功能
+│   │   ├── shared/                    // 跨业务复用的组件和工具
+│   │   ├── theme/                     // 组件主题令牌
+│   │   ├── styles/                    // 全局与布局样式
+│   │   └── assets/                    // 图片、字体等静态资源
+│   └── tests/                         // 前端自动化测试
+├── backend/                           // FastAPI 后端
+│   ├── pyproject.toml                 // Python 依赖与工具配置
+│   ├── alembic.ini                    // 数据库迁移配置
+│   ├── app/                           // 后端源码
+│   │   ├── main.py                   // 应用入口与路由注册
+│   │   ├── api/                      // 接口路由与参数校验
+│   │   ├── schemas/                  // 请求和响应结构
+│   │   ├── services/                 // 业务规则与流程
+│   │   ├── repositories/             // 数据库访问
+│   │   ├── models/                   // 数据库模型
+│   │   └── core/                     // 配置、日志、安全等公共能力
+│   ├── migrations/                   // 数据库迁移脚本
+│   └── tests/                        // 后端自动化测试
+├── deploy/                            // 部署配置与脚本
+└── .github/                           // GitHub 协作配置
+    ├── workflows/                    // CI 工作流
+    ├── ISSUE_TEMPLATE/               // Issue 模板
+    ├── pull_request_template.md      // Pull Request 模板
+    └── CODEOWNERS                    // 代码负责人规则
 ```
 
 新项目目录要求：
 
 1. 前端代码放在 `frontend`，后端代码放在 `backend`，项目文档放在 `docs`。
 2. 数据库迁移放在 `backend/migrations`，部署配置放在 `deploy` 或根目录，GitHub 配置放在 `.github`。
-3. 未经批准不得改变一级目录结构；项目不需要的二级目录可以省略。
+3. 未经批准不得改变一级目录结构；内部目录按实际能力创建。
 4. 不得提交临时文件、日志、数据库文件和真实业务数据。
 
-现有项目保持原有结构和兼容性，不为套用模板重命名目录或全量重构。
+`frontend/src/features/<业务域>` 集中该业务的页面、组件、Hook 和 API Service；`shared` 只放跨业务复用的代码。后端依赖方向和各层职责见 `docs/codex/backend.md`。同一业务域在前后端使用可对应的命名，使页面、请求、路由、业务规则和数据访问可以顺序追踪；例如订单功能可从 `frontend/src/features/orders/` 对应到 `backend/app/api/orders.py`、`services/orders.py` 和 `repositories/orders.py`。仅创建实际需要的目录和文件，不为凑结构建立空壳。
+
+此结构借鉴[若依前后端分离版的职责分层](https://doc.ruoyi.vip/ruoyi-vue/document/xmjs.html)，不复制其技术栈或功能模块。现有项目保持原有结构和兼容性，不为套用模板重命名目录或全量重构。
 
 ## 3. 既有项目规范接入
 
@@ -212,19 +228,7 @@ AI 须选择能覆盖风险的最轻级别并说明理由；无法判定时按�
 
 ## 6. 修改范围
 
-必须：
-
-1. 只修改完成当前任务所必需的文件，保持现有业务规则、接口和兼容性。
-2. 复用已有代码和实现模式，新增或修改业务逻辑时补充必要测试。
-3. 发现无关问题时只记录，不顺带修改。
-
-不得：
-
-1. 增加需求外的功能、页面、接口、业务规则或字段。
-2. 进行与当前任务无关的重构或修改无关文件。
-3. 擅自删除功能、接口、字段或数据，或修改公共模块、认证、权限和部署配置。
-4. 为“以后可能使用”提前增加代码、字段或组件。
-5. 在多处维护同一业务规则。
+修改边界以根目录 `AGENTS.md` 第 2 节为准。新增或修改业务逻辑时补充必要测试；发现无关问题只记录，不顺带修改。未经确认不得删除现有功能、接口、字段或数据，也不得在多处维护同一业务规则。
 
 ## 7. 安全与生产边界
 
