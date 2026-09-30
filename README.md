@@ -106,7 +106,7 @@ flowchart LR
 
 新 Web 项目默认使用 Ant Design 6、`@ant-design/icons` 6 和 SEEKWAY 主题；需要图表时默认使用 Apache ECharts。工程约束见 `docs/codex/frontend.md`，界面规则见 `docs/web-ui-standard.md`。设计参考：[SEEKWAY Web UI Kit V1.2.0](https://www.figma.com/design/eed9GukOv7zM7n04Lu1xUl)。
 
-新建、明显重设计或方向不明确的界面按 [界面设计发现与探索](docs/codex/interface-design.md) 选择执行深度：先理解任务和感觉层意图，需要探索时审查空间、安排覆盖、筛选并比较方向，再深化原型和实现。成熟模式内的局部任务继续复用现有设计。
+新建、明显重设计或方向不明确的界面，按 [界面设计发现与探索](docs/codex/interface-design.md) 确定是否需要多方案探索。成熟模式内的局部任务继续复用现有设计。
 
 现有项目无需自动拆分界面规范；迁移时保留原规则并更新专项索引。
 
@@ -118,9 +118,7 @@ flowchart LR
 python -B templates/design-exploration/sample.py --space templates/design-exploration/example.json --seed 41382 --count 16
 ```
 
-工具按明确分组安排覆盖，在同分候选间使用带种子的伪随机顺序，并将配置、版本、候选和缺口输出为 JSON。退出码 `0` 仅表示数量及配额满足，`1` 为配置错误，`2` 为组合或配额不足；采样完成不代表设计质量通过。输出解释与筛选要求见专项规范。
-
-业务项目需要程序采样时，按需复制 `sample.py`、`space.py` 和任务配置到 `scripts/design-exploration/`，记录实际路径；需要维护工具时再复制 `tests/`。不属于应用运行时依赖，不要求每个项目安装 Python。不可运行时采用显式覆盖表，不让模型声称已完成随机采样。
+工具输出 JSON，记录配置、版本、候选和覆盖缺口。采样完成不代表设计质量通过。业务项目的接入方式、配置字段、退出码及不可运行时的处理，见[专项规范第 4 节](docs/codex/interface-design.md#4-覆盖安排与程序采样)。
 
 ## 登录页模板
 

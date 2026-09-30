@@ -26,9 +26,9 @@
 
 新 Web 项目需要图表时，默认使用 Apache ECharts 官方 `echarts` 包；不需要图表时不安装。现有项目保留已验证的图表库，不为套用基线迁移。React 封装包、ECharts 插件或其他图表库不属于默认依赖，新增前须获得确认。使用项目现有包管理器从 npm Registry 安装并提交锁文件。官方来源：[ECharts 安装说明](https://echarts.apache.org/handbook/en/basics/download/)、[Apache-2.0 许可证](https://github.com/apache/echarts/blob/master/LICENSE)。
 
-新建或明显重塑界面时，可选使用 [Frontend Design Skill](https://github.com/anthropics/skills/tree/main/skills/frontend-design) 先形成与业务、受众和页面目标相关的配色、字体、布局、动效和文案方案，再实现代码。用户明确要求、项目现有设计系统和 Web UI 规范始终优先；不得因使用该 Skill 擅自增加字体、组件库或其他生产依赖。
+新建或明显重塑界面时，可选使用 [Frontend Design Skill](https://github.com/anthropics/skills/tree/main/skills/frontend-design) 辅助制定配色、字体、布局、动效和文案方案。用户明确要求、项目现有设计系统和 Web UI 规范始终优先；不得因使用该 Skill 擅自增加字体、组件库或其他生产依赖。
 
-设计意图、空间探索和方向确认按 `docs/codex/interface-design.md` 执行；使用 Skill 不代表空间已充分探索或方案已通过验证。实现前核对选定方案与令牌、组件和页面状态的对应关系，原型中发现问题须反馈到设计决策，不自行改写已确认的任务与业务规则。
+设计探索和方向确认按 `docs/codex/interface-design.md` 执行，使用 Skill 不能替代探索或验证。实现前核对选定方案与令牌、组件和页面状态的对应关系；原型发现问题时须回查设计决策，不自行改写已确认的任务与业务规则。
 
 组件按以下顺序选择：
 
