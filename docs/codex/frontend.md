@@ -28,6 +28,8 @@
 
 新建或明显重塑界面时，可选使用 [Frontend Design Skill](https://github.com/anthropics/skills/tree/main/skills/frontend-design) 先形成与业务、受众和页面目标相关的配色、字体、布局、动效和文案方案，再实现代码。用户明确要求、项目现有设计系统和 Web UI 规范始终优先；不得因使用该 Skill 擅自增加字体、组件库或其他生产依赖。
 
+设计意图、空间探索和方向确认按 `docs/codex/interface-design.md` 执行；使用 Skill 不代表空间已充分探索或方案已通过验证。实现前核对选定方案与令牌、组件和页面状态的对应关系，原型中发现问题须反馈到设计决策，不自行改写已确认的任务与业务规则。
+
 组件按以下顺序选择：
 
 ```text

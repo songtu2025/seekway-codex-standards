@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "scope": "structure",
+  "task": "运营人员在同一工作台核对异常订单，比较记录并提交处理决定。",
+  "constraints": [
+    "所有方案保持相同的核对与提交任务，不引入 AI 自动决策能力。",
+    "权限和最终业务判断由后端校验；关键操作必须可通过键盘完成。",
+    "复用项目已确认的组件库、品牌令牌和桌面视口。"
+  ],
+  "axes": [
+    {
+      "id": "organization", "label": "任务组织", "kind": "core",
+      "source": "从逐条推进、对象核对与并行比较三种真实操作需要提出；待用户确认。",
+      "options": ["任务队列", "对象工作区", "比较工作区"]
+    },
+    {
+      "id": "navigation", "label": "导航方式", "kind": "core",
+      "source": "侧栏是当前基准；上下文导航和可发现的命令入口用于挑战固定菜单假设。",
+      "options": ["固定侧栏", "上下文导航", "命令入口"]
+    },
+    {
+      "id": "workspace", "label": "工作区组织", "kind": "core",
+      "source": "对应连续核对、记录详情与并排比较；名称差异须通过操作路径验证。",
+      "options": ["列表与详情", "分步处理", "并排面板"]
+    },
+    {
+      "id": "density", "label": "信息密度", "kind": "core",
+      "source": "以默认平衡密度为基准，探索紧凑比较与低密度逐条处理的边界。",
+      "options": ["低", "平衡", "高"]
+    },
+    {
+      "id": "emphasis", "label": "视觉强调", "kind": "visual",
+      "source": "在同一品牌令牌内比较状态强调和主操作强调，不能计作结构发散。",
+      "options": ["状态优先", "操作优先"]
+    }
+  ],
+  "baseline": {
+    "organization": "任务队列", "navigation": "固定侧栏",
+    "workspace": "列表与详情", "density": "平衡", "emphasis": "状态优先"
+  },
+  "exclusions": [
+    {
+      "match": {"organization": "比较工作区", "workspace": "分步处理"},
+      "reason": "本轮比较工作区需要同时查看记录，单对象分步处理不符合此方向的定义。"
+    },
+    {
+      "match": {"workspace": "并排面板", "density": "低"},
+      "reason": "本轮最小视口内，低密度并排面板无法同时呈现核对所需字段。"
+    }
+  ],
+  "groups": [
+    {
+      "id": "orthogonal_object", "purpose": "探索以对象为中心的组织方式。",
+      "minimum": 1, "min_changes": 2,
+      "patterns": [{"organization": "对象工作区"}]
+    },
+    {
+      "id": "orthogonal_comparison", "purpose": "探索以并行比较为中心的组织方式。",
+      "minimum": 1, "min_changes": 2,
+      "patterns": [{"organization": "比较工作区"}]
+    },
+    {
+      "id": "boundary_low", "purpose": "验证低密度逐条处理的适用边界。",
+      "minimum": 1, "min_changes": 1, "patterns": [{"density": "低"}]
+    },
+    {
+      "id": "boundary_high", "purpose": "验证高密度比较的适用边界。",
+      "minimum": 1, "min_changes": 1, "patterns": [{"density": "高"}]
+    },
+    {
+      "id": "anti_prior_context", "purpose": "挑战固定侧栏必要性，验证可发现的上下文入口。",
+      "minimum": 1, "min_changes": 1, "patterns": [{"navigation": "上下文导航"}]
+    },
+    {
+      "id": "anti_prior_command", "purpose": "挑战固定菜单假设，验证可发现、可键盘操作的命令入口。",
+      "minimum": 1, "min_changes": 1, "patterns": [{"navigation": "命令入口"}]
+    }
+  ]
+}
