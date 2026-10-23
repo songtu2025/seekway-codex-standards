@@ -240,4 +240,4 @@ npx --offline --no --package=jscpd@5.2.0 jscpd templates/design-exploration --fo
 ## 版本状态
 
 - 当前已发布版本：[V2.0.0 标签 ZIP](https://github.com/songtu2025/seekway-codex-standards/archive/refs/tags/v2.0.0.zip)（2026-10-03），变更见 [CHANGELOG.md](CHANGELOG.md)。
-- 当前工作内容与已发布 V2.0.0 一致；后续变更使用新版本号，不修改已发布标签。
+- 当前工作版本：V2.1.0（未发布），变更见 [CHANGELOG.md](CHANGELOG.md)；已发布 V2.0.0 标签保持不变。
