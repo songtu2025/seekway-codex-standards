@@ -1,6 +1,6 @@
 # SEEKWAY Codex 开发规范
 
-本仓库保存 SEEKWAY Codex 开发规范，约束需求分析、代码修改、验证和结果汇报。
+本仓库保存 SEEKWAY 开发规范，供 Codex 和 Claude Code 使用，约束需求分析、代码修改、验证和结果汇报。
 
 ## 不会开发也能使用
 
@@ -9,8 +9,8 @@
 ### 第一次使用
 
 1. 新项目先创建一个空文件夹；现有项目打开原项目根目录。不要打开规范 ZIP 的解压目录。
-2. 在该目录中新建 Codex 任务，复制下面对应的提示词。
-3. 回答业务问题，阅读 Codex 用通俗语言给出的修改、风险和恢复方式。
+2. 在该目录中新建 Codex 任务或 Claude Code 会话，复制下面对应的提示词。
+3. 回答业务问题，阅读开发助手用通俗语言给出的修改、风险和恢复方式。
 4. 确认需求、方案或 Demo 后再允许修改。
 5. 根据验证结果决定发布、继续修改或停止。
 
@@ -21,7 +21,7 @@
 
 请从 https://github.com/songtu2025/seekway-codex-standards 获取规范，使用 README 标注的当前已发布版本对应的标签 ZIP。若无法取得该版本，先说明原因并询问我是否使用同版本的受控离线 ZIP；只有我明确要求试用主分支时才使用 main.zip。将 ZIP 下载并解压到当前项目之外的临时目录，不要使用 git clone，也不要把整个规范仓库放入当前项目。
 
-先检查当前目录、规范来源、Git 状态和回退条件，再用通俗语言说明需要接入的文件、需要我补充的信息、风险和验证方式，等我确认后再执行。完成后记录接入来源、规范版本、日期和版本控制状态，并提醒我新建 Codex 任务验证规则加载。先不要开发业务功能。
+先检查当前目录、规范来源、Git 状态和回退条件，再用通俗语言说明需要接入的文件、需要我补充的信息、风险和验证方式，等我确认后再执行。如果使用 Claude Code，在项目根目录用 CLAUDE.md 导入 AGENTS.md。完成后记录接入来源、规范版本、日期和版本控制状态，并提醒我用同一工具开启新会话验证规则加载。先不要开发业务功能。
 ```
 
 ### 现有项目
@@ -31,16 +31,16 @@
 
 请从 https://github.com/songtu2025/seekway-codex-standards 获取规范，使用 README 标注的当前已发布版本对应的标签 ZIP。若无法取得该版本，先说明原因并询问我是否使用同版本的受控离线 ZIP；只有我明确要求试用主分支时才使用 main.zip。将 ZIP 下载并解压到当前项目之外的临时目录，不要使用 git clone，也不要把整个规范仓库放入当前项目。
 
-先检查当前目录、规范来源、Git 状态和回退条件，再只读审计现有规则、技术栈和检查命令。保留有效规则，用通俗语言说明差异、风险和恢复方式，等我确认后再备份需要修改的规则文件并合并。完成后记录接入来源、规范版本、日期和版本控制状态，并提醒我新建 Codex 任务验证规则加载。
+先检查当前目录、规范来源、Git 状态和回退条件，再只读审计现有规则（包括 AGENTS.md、AGENTS.override.md 和 CLAUDE.md）、技术栈和检查命令。保留有效规则，用通俗语言说明差异、风险和恢复方式，等我确认后再备份需要修改的规则文件并合并。如果使用 Claude Code，保留已有 Claude 规则，为各适用目录添加指向有效共享规则的导入。完成后记录接入来源、规范版本、日期和版本控制状态，并提醒我用同一工具开启新会话验证规则加载。
 ```
 
 ### 无 Git 接入说明
 
-- 接入规范不需要 Git；正式开发仍应使用 Git 或其他受控版本管理。没有 Git 时，Codex 不能声称已经提交、推送或具备可靠回滚能力。
+- 接入规范不需要 Git；正式开发仍应使用 Git 或其他受控版本管理。没有 Git 时，开发助手不能声称已经提交、推送或具备可靠回滚能力。
 - 已发布版本使用标签 ZIP。只有试用主分支最新内容时才使用 [main.zip](https://github.com/songtu2025/seekway-codex-standards/archive/refs/heads/main.zip)；无法访问 GitHub 时，使用公司受控共享位置提供的同版本 ZIP。
 - ZIP 只在项目外的临时目录中审计。接入前必须确认来源和版本，接入后不得把完整规范仓库留在业务项目中。
 - 没有 Git 的现有项目在修改前须将目标规则文件备份到项目外。该备份只用于本次恢复，不能代替版本管理。
-- 接入后新建 Codex 任务并发送：`请列出本任务实际加载的 AGENTS.md 路径，并概括关键规则，不要修改文件。`
+- 接入后按下方[规则加载方式](#规则加载方式)，在实际使用的工具中开启新会话并验证。
 
 ### 日常提需求
 
@@ -75,13 +75,14 @@ flowchart LR
 
 ![SEEKWAY Codex 开发规范架构](docs/images/seekway-codex-standards-architecture.png)
 
-`AGENTS.md` 是规则入口，Codex 按任务加载 `docs/codex` 专项规范，并使用模板、质量门禁和完成报告约束交付。
+`AGENTS.md` 维护共享规则，Codex 直接读取，Claude Code 通过 `CLAUDE.md` 导入。两端按任务加载 `docs/codex` 专项规范，并使用模板、质量门禁和完成报告约束交付。
 
 按需查看[规则执行链](docs/images/seekway-codex-standards-level2-architecture.png)和[单次开发任务的控制点](docs/images/seekway-codex-standards-level3-architecture.png)。
 
 ## 仓库内容
 
 - [AGENTS.md](AGENTS.md)：始终生效的规则和专项规范索引。
+- [CLAUDE.md](CLAUDE.md)：Claude Code 的共享规则入口。
 - [docs/codex](docs/codex)：按任务加载的开发与验证规范。
 - [templates](templates)：项目文档、主题、界面规范和登录页模板。
 - [CHANGELOG.md](CHANGELOG.md)：版本变更记录。
@@ -90,7 +91,7 @@ flowchart LR
 
 ### 新项目
 
-1. 将根目录 `AGENTS.md` 复制到项目根目录。
+1. 将根目录 `AGENTS.md` 复制到项目根目录。使用 Claude Code 时一并复制 `CLAUDE.md`。若所用旧版 ZIP 未包含该入口，在项目根目录创建 `CLAUDE.md`，内容为一行 `@AGENTS.md`。
 2. 将 `docs/codex` 复制到项目的 `docs/codex`，保留 `AGENTS.md` 中的专项规范索引。
 3. 使用 `templates/project-README-template.md` 建立 README，并填写业务边界、实际检查命令和项目差异。
 4. 将 `templates/gitignore-template` 复制为根目录 `.gitignore`，再补充项目产物。
@@ -100,7 +101,7 @@ flowchart LR
 
 ### 现有项目
 
-先审计现有规则和配置，再按 `docs/codex/workflow.md` 差异合并。不得用公司模板覆盖已有规则或为符合默认技术栈进行全量迁移。项目 README 须记录规范基线版本、接入来源、接入日期、版本控制状态、加载验证、项目差异和真实检查命令。
+先审计现有规则和配置，再按本仓库[接入流程](docs/codex/workflow.md#3-既有项目规范接入)差异合并。已有 Claude Code 规则时，保留有效规则并核对导入和覆盖关系。项目 README 须记录规范基线版本、接入来源、接入日期、版本控制状态、加载验证、项目差异和真实检查命令。
 
 ## Web 界面规范
 
@@ -200,7 +201,10 @@ npx skills add https://github.com/anthropics/skills --skill frontend-design
 
 ## 规则加载方式
 
-规则优先级、目录作用域和 `AGENTS.override.md` 处理方式见 [开发流程与项目边界](docs/codex/workflow.md)；加载机制以 [Codex 官方说明](https://developers.openai.com/zh-Hans/docs/agent-configuration/agents-md) 为准。
+- Codex 在项目根目录开启新任务，请它列出实际加载的 `AGENTS.md` 或 `AGENTS.override.md` 路径并概括关键规则。[Codex 官方说明](https://developers.openai.com/zh-Hans/docs/agent-configuration/agents-md)
+- Claude Code 在项目根目录开启新会话，运行 `/context all`，在 `Memory files` 中确认 `CLAUDE.md` 已加载，再请 Claude 概括通过导入读到的共享规则。核对子目录规则时，在同一会话中请 Claude 先读取该目录内的文件，再核对加载的局部规则。[Claude Code 官方说明](https://code.claude.com/docs/en/memory#share-one-file-with-other-coding-tools)
+
+目录规则和覆盖文件的处理见[规则文件边界](docs/codex/workflow.md#34-规则文件边界)。
 
 ## 仓库检查
 
@@ -239,5 +243,5 @@ npx --offline --no --package=jscpd@5.2.0 jscpd templates/design-exploration --fo
 
 ## 版本状态
 
-- 当前已发布版本：[V2.1.0 标签 ZIP](https://github.com/songtu2025/seekway-codex-standards/archive/refs/tags/v2.1.0.zip)（2026-10-23），变更见 [CHANGELOG.md](CHANGELOG.md)。
-- 当前工作内容与已发布 V2.1.0 一致；后续变更使用新版本号，不修改已发布标签。
+- 当前已发布版本：[V2.2.0 标签 ZIP](https://github.com/songtu2025/seekway-codex-standards/archive/refs/tags/v2.2.0.zip)（2026-11-06），变更见 [CHANGELOG.md](CHANGELOG.md)。
+- 当前工作内容与已发布 V2.2.0 一致；后续变更使用新版本号，不修改已发布标签。
